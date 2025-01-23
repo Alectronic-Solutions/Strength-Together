@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strength Together - Support Group</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    header {
+      background: #8B4513; /* Dark Tan */
+      color: white;
+      padding: 10px 0;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 90%;
+      margin: 0 auto;
+    }
+
+    .navbar .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar .logo img {
+      height: 50px;
+      margin-right: 10px;
+    }
+
+    .navbar .logo h1 {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+
+    .navbar nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 1.1rem;
+    }
+
+    .navbar nav a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      width: 80%;
+      margin: 20px auto;
+      padding: 20px;
+      background: white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    footer {
+      background: #333;
+      color: white;
+      padding: 40px 20px;
+      margin-top: 20px;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .footer-section {
+      flex: 1;
+      margin: 10px;
+      min-width: 200px;
+    }
+
+    .footer-section h3 {
+      margin-bottom: 20px;
+    }
+
+    .footer-section a {
+      color: white;
+      text-decoration: none;
+      display: block;
+      margin: 10px 0;
+    }
+
+    .footer-section a:hover {
+      text-decoration: underline;
+    }
+
+    .footer-section .logo img {
+      height: 80px; /* Bigger logo */
+      margin-bottom: 10px;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 20px;
+      padding-top: 10px;
+      border-top: 1px solid #444;
+    }
+
+    .footer-bottom a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .footer-bottom a:hover {
+      text-decoration: underline;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      height: 400px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+    }
+
+    .hero video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    .hero .text-box {
+      background: rgba(0, 0, 0, 0.6); /* Translucent black */
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .hero h2 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #8B4513; /* Dark Tan */
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      margin-top: 20px;
+      border-radius: 5px;
+    }
+
+    .btn:hover {
+      background: #A0522D; /* Darker Tan */
+    }
+
+    /* About Us Section */
+    .about-content {
+      position: relative;
+      height: 400px;
+      background: url('images/about-us.jpg') no-repeat center center/cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+    }
+
+    .about-content .text-box {
+      background: rgba(0, 0, 0, 0.6); /* Translucent black */
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .about-content h2 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    .about-content p {
+      font-size: 1.2rem;
+    }
+
+    /* Events Section */
+    .events-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .events-list li {
+      background: #f4f4f4;
+      margin: 10px 0;
+      padding: 15px;
+      border-left: 5px solid #8B4513; /* Dark Tan */
+    }
+
+    /* Services Section */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .service-item {
+      background: #f4f4f4;
+      padding: 20px;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    .service-item h3 {
+      margin-bottom: 10px;
+    }
+
+    .service-item .btn {
+      margin-top: 10px;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 500px;
+      width: 90%;
+      position: relative;
+    }
+
+    .modal-content h2 {
+      margin-top: 0;
+    }
+
+    .modal-content .btn {
+      margin-top: 20px;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* Testimonials Section */
+    .testimonials-container {
+      position: relative;
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .testimonial-item {
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .testimonial-item.active {
+      opacity: 1;
+    }
+
+    .testimonial-item p {
+      font-style: italic;
+    }
+
+    .testimonial-item h4 {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    /* Contact Section */
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .contact-form input, .contact-form textarea {
+      margin: 10px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      resize: none; /* Prevent resizing */
+    }
+
+    .contact-form button {
+      background: #8B4513; /* Dark Tan */
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .contact-form button:hover {
+      background: #A0522D; /* Darker Tan */
+    }
+
+    /* Section Titles */
+    h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      margin-bottom: 20px;
+    }
+
+    /* Back to Top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #8B4513; /* Dark Tan */
+      color: white;
+      padding: 15px;
+      border-radius: 50%;
+      text-decoration: none;
+      display: none;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .back-to-top:hover {
+      background: #A0522D; /* Darker Tan */
+    }
+
+    .back-to-top::after {
+      content: "↑";
+      font-size: 1.5rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .navbar nav {
+        margin-top: 10px;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="navbar">
+      <div class="logo">
+        <img src="images/logo.png" alt="Strength Together Logo">
+        <h1>Strength Together</h1>
+      </div>
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About Us</a>
+        <a href="#services">Services</a>
+        <a href="#events">Events</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <video autoplay muted loop>
+      <source src="videos/hero-video.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="text-box">
+      <h2>Welcome to Strength Together</h2>
+      <p>We are here to support you through life's challenges. Join our community and find strength in togetherness.</p>
+      <a href="#about" class="btn">Learn More</a>
+    </div>
+  </section>
+
+  <!-- About Us Section -->
+  <section id="about" class="about-content">
+    <div class="text-box">
+      <h2>About Us</h2>
+      <p>Strength Together is a support group dedicated to helping individuals navigate life's challenges. Our mission is to provide a safe and welcoming space for everyone to share, learn, and grow together.</p>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="container">
+    <h2>Our Services</h2>
+    <div class="services-grid">
+      <div class="service-item">
+        <h3>Counseling</h3>
+        <p>Professional counseling services to help you cope with life's challenges.</p>
+        <button class="btn" onclick="openModal('counseling-modal')">Learn More</button>
+      </div>
+      <div class="service-item">
+        <h3>Workshops</h3>
+        <p>Interactive workshops to build resilience and emotional strength.</p>
+        <button class="btn" onclick="openModal('workshops-modal')">Learn More</button>
+      </div>
+      <div class="service-item">
+        <h3>Support Groups</h3>
+        <p>Join our community support groups to share and connect with others.</p>
+        <button class="btn" onclick="openModal('support-groups-modal')">Learn More</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modals for Services -->
+  <div id="counseling-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal('counseling-modal')">&times;</span>
+      <h2>Counseling Services</h2>
+      <p>Our professional counseling services are designed to help you navigate life's challenges. Whether you're dealing with stress, anxiety, or other emotional difficulties, our licensed counselors are here to support you.</p>
+      <ul>
+        <li>One-on-one sessions</li>
+        <li>Personalized care plans</li>
+        <li>Confidential and safe environment</li>
+      </ul>
+      <a href="#contact" class="btn" onclick="closeModal('counseling-modal')">Contact Us</a>
+    </div>
+  </div>
+
+  <div id="workshops-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal('workshops-modal')">&times;</span>
+      <h2>Workshops</h2>
+      <p>Our interactive workshops focus on building resilience, emotional strength, and coping mechanisms. Join us to learn practical skills and connect with others who share similar experiences.</p>
+      <ul>
+        <li>Weekly workshops</li>
+        <li>Expert facilitators</li>
+        <li>Hands-on activities</li>
+      </ul>
+      <a href="#contact" class="btn" onclick="closeModal('workshops-modal')">Contact Us</a>
+    </div>
+  </div>
+
+  <div id="support-groups-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal('support-groups-modal')">&times;</span>
+      <h2>Support Groups</h2>
+      <p>Our community support groups provide a safe space for individuals to share their experiences, learn from others, and build meaningful connections. Join us to find strength in togetherness.</p>
+      <ul>
+        <li>Peer-led discussions</li>
+        <li>Weekly meetups</li>
+        <li>Safe and welcoming environment</li>
+      </ul>
+      <a href="#contact" class="btn" onclick="closeModal('support-groups-modal')">Contact Us</a>
+    </div>
+  </div>
+
+  <!-- Events Section -->
+  <section id="events" class="container">
+    <h2>Upcoming Events</h2>
+    <ul class="events-list">
+      <li><strong>Weekly Meetup:</strong> Every Saturday at 10 AM.</li>
+      <li><strong>Mental Health Workshop:</strong> October 15th, 2023.</li>
+      <li><strong>Community Picnic:</strong> November 5th, 2023.</li>
+    </ul>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section id="testimonials" class="container">
+    <h2>Testimonials</h2>
+    <div class="testimonials-container">
+      <div class="testimonial-item active">
+        <p>"Strength Together has been a lifesaver for me. The support and understanding I found here are unparalleled."</p>
+        <h4>- Jane Doe</h4>
+      </div>
+      <div class="testimonial-item">
+        <p>"The workshops helped me build resilience and confidence. I'm so grateful for this community."</p>
+        <h4>- John Smith</h4>
+      </div>
+      <div class="testimonial-item">
+        <p>"Joining this group was the best decision I made. I feel understood and supported."</p>
+        <h4>- Sarah Johnson</h4>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="container">
+    <h2>Contact Us</h2>
+    <form class="contact-form">
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="Your Message" rows="5" required></textarea>
+      <button type="submit" class="btn">Send Message</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <div class="logo">
+          <img src="images/logo.png" alt="Strength Together Logo">
+          <h3>Strength Together</h3>
+        </div>
+        <p>Supporting Each Other Through Life's Challenges</p>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <a href="#home">Home</a>
+        <a href="#about">About Us</a>
+        <a href="#services">Services</a>
+        <a href="#events">Events</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="footer-section">
+        <h3>Contact Info</h3>
+        <p>Email: support@strengthtogether.com</p>
+        <p>Phone: +1 (123) 456-7890</p>
+        <p>Address: 123 Main St, City, Country</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2023 Strength Together. All rights reserved.</p>
+      <p>
+        <a href="terms-privacy.html">Terms of Service & Privacy Policy</a>
+      </p>
+      <p>Designed by <a href="https://alectronicsolutions.wixsite.com/home" target="_blank">Alectronic Solutions</a></p>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <a href="#home" class="back-to-top" id="back-to-top"></a>
+
+  <!-- JavaScript for Smooth Scrolling, Back to Top Button, Testimonials, and Modals -->
+  <script>
+    // Smooth scrolling
+    document.querySelectorAll('nav a').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // Show/hide back to top button
+    window.addEventListener('scroll', function() {
+      const backToTopButton = document.getElementById('back-to-top');
+      if (window.scrollY > 300) {
+        backToTopButton.style.display = 'block';
+      } else {
+        backToTopButton.style.display = 'none';
+      }
+    });
+
+    // Testimonials fade effect
+    let currentTestimonial = 0;
+    const testimonials = document.querySelectorAll('.testimonial-item');
+
+    function showNextTestimonial() {
+      testimonials[currentTestimonial].classList.remove('active');
+      currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+      testimonials[currentTestimonial].classList.add('active');
+    }
+
+    setInterval(showNextTestimonial, 5000); // Change testimonial every 5 seconds
+
+    // Modal functionality
+    function openModal(modalId) {
+      document.getElementById(modalId).style.display = 'flex';
+    }
+
+    function closeModal(modalId) {
+      document.getElementById(modalId).style.display = 'none';
+    }
+
+    // Close modal when clicking outside the modal content
+    window.addEventListener('click', function(event) {
+      if (event.target.classList.contains('modal')) {
+        event.target.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
