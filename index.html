@@ -9,7 +9,9 @@
     <meta property="og:image" content="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
     <title>Strength Together | Find Your Community</title>
 
-    <!-- Favicon -->
+    <!-- Favicon: Primary (User Uploaded) -->
+    <link rel="icon" href="portfolio-13.png" type="image/png">
+    <!-- Favicon: Backup (Original) -->
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2966/2966334.png" type="image/png">
 
     <!-- Google Fonts -->
@@ -179,6 +181,14 @@
 
         .logo i {
             color: var(--accent);
+        }
+
+        /* Adjust logo image styles */
+        .logo-img {
+            height: 40px;
+            width: auto;
+            border-radius: 50%;
+            object-fit: cover;
         }
 
         .nav-links {
@@ -639,7 +649,14 @@
     <header>
         <div class="container nav-container">
             <a href="#" class="logo">
-                <i class="fa-solid fa-hands-holding-circle"></i> Strength Together
+                <!-- Primary Logo Icon (Image) -->
+                <!-- onerror script: If image fails, hide image and show backup icon -->
+                <img src="portfolio-13.jpg" alt="Logo" class="logo-img" onerror="this.style.display='none'; document.getElementById('backup-icon').style.display='inline-block';">
+                
+                <!-- Backup Logo Icon (Font Awesome) - Hidden by default -->
+                <i id="backup-icon" class="fa-solid fa-hands-holding-circle" style="display: none; color: var(--accent);"></i>
+                
+                <span style="margin-left: 10px;">Strength Together</span>
             </a>
             <nav>
                 <ul class="nav-links" id="navLinks">
