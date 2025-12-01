@@ -17,7 +17,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -35,10 +35,14 @@
             --bg-alt: #FBE9E7;        /* Very Light Orange Tint */
             --card-bg: #FFFFFF;
             --white: #FFFFFF;
-            --shadow: 0 4px 12px rgba(0,0,0,0.1);
-            --shadow-hover: 0 8px 16px rgba(0,0,0,0.15);
-            --transition: all 0.3s ease;
-            --overlay-color: rgba(62, 39, 35, 0.7);
+            --input-bg: #FFFFFF;
+            --border-color: rgba(121, 85, 72, 0.15);
+            /* Refined Shadows for Professional Feel */
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+            --shadow-md: 0 8px 24px rgba(0,0,0,0.08);
+            --shadow-hover: 0 12px 32px rgba(0,0,0,0.12);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother easing */
+            --overlay-color: rgba(62, 39, 35, 0.75);
         }
 
         /* --- Dark Mode Variables --- */
@@ -53,9 +57,12 @@
             --bg-alt: #1E1E1E;        /* Dark Grey */
             --card-bg: #2C2C2C;       /* Dark Card */
             --white: #1E1E1E;         /* Dark element bg */
-            --shadow: 0 4px 12px rgba(0,0,0,0.5);
-            --shadow-hover: 0 8px 16px rgba(0,0,0,0.7);
-            --overlay-color: rgba(0, 0, 0, 0.8);
+            --input-bg: #333333;
+            --border-color: #444444;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
+            --shadow-md: 0 8px 24px rgba(0,0,0,0.4);
+            --shadow-hover: 0 12px 32px rgba(0,0,0,0.5);
+            --overlay-color: rgba(0, 0, 0, 0.85);
         }
 
         /* --- Global Reset & Typography --- */
@@ -73,15 +80,17 @@
             font-family: 'Open Sans', sans-serif;
             color: var(--text-dark);
             background-color: var(--bg-light);
-            line-height: 1.6;
+            line-height: 1.7;
             overflow-x: hidden;
             transition: background-color 0.3s ease, color 0.3s ease;
+            -webkit-font-smoothing: antialiased; /* Crisper text */
         }
 
         h1, h2, h3, h4 {
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
             color: var(--text-dark);
+            letter-spacing: -0.02em; /* Tighter headings for modern look */
         }
 
         a {
@@ -104,12 +113,12 @@
             width: 100%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
         }
 
         .btn {
             display: inline-block;
-            padding: 12px 30px;
+            padding: 14px 34px;
             border-radius: 50px;
             font-weight: 600;
             cursor: pointer;
@@ -117,46 +126,87 @@
             border: none;
             font-family: 'Montserrat', sans-serif;
             text-align: center;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
         }
 
         .btn-primary {
             background-color: var(--primary);
-            color: #FFFFFF; /* Always white text on primary buttons */
+            color: #FFFFFF;
+            box-shadow: 0 4px 14px rgba(121, 85, 72, 0.3);
         }
 
         .btn-primary:hover {
             background-color: var(--primary-dark);
             transform: translateY(-2px);
-            box-shadow: var(--shadow-hover);
+            box-shadow: 0 6px 20px rgba(121, 85, 72, 0.4);
         }
 
         .btn-accent {
             background-color: var(--accent);
-            color: #FFFFFF; /* Always white text on accent buttons */
+            color: #FFFFFF;
+            box-shadow: 0 4px 14px rgba(255, 112, 67, 0.3);
         }
 
         .btn-accent:hover {
             background-color: var(--accent-hover);
             transform: translateY(-2px);
-            box-shadow: var(--shadow-hover);
+            box-shadow: 0 6px 20px rgba(255, 112, 67, 0.4);
+        }
+
+        .btn-full {
+            width: 100%;
         }
 
         .section-padding {
-            padding: 100px 0;
+            padding: 120px 0;
         }
 
         .text-center {
             text-align: center;
         }
 
+        /* Decorative underline for section titles */
+        .section-header {
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            color: var(--text-light);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 1.15rem;
+        }
+
         /* --- Header & Nav --- */
         header {
             background-color: var(--card-bg);
-            box-shadow: var(--shadow);
+            box-shadow: var(--shadow-sm);
             position: sticky;
             top: 0;
             z-index: 1000;
-            height: 70px;
+            height: 80px;
             display: flex;
             align-items: center;
             transition: background-color 0.3s ease;
@@ -170,30 +220,27 @@
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.35rem;
             font-weight: 700;
             color: var(--primary);
             font-family: 'Montserrat', sans-serif;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            letter-spacing: -0.5px;
         }
 
-        .logo i {
-            color: var(--accent);
-        }
-
-        /* Adjust logo image styles */
         .logo-img {
-            height: 40px;
-            width: auto;
+            height: 45px;
+            width: 45px;
             border-radius: 50%;
             object-fit: cover;
+            border: 2px solid var(--accent);
         }
 
         .nav-links {
             display: flex;
-            gap: 30px;
+            gap: 32px;
             align-items: center;
         }
 
@@ -202,10 +249,27 @@
             color: var(--text-dark);
             transition: var(--transition);
             font-size: 0.95rem;
+            position: relative;
         }
 
-        .nav-links a:hover {
+        /* Nav link hover underline effect */
+        .nav-links a:not(.btn)::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:not(.btn):hover {
             color: var(--primary);
+        }
+
+        .nav-links a:not(.btn):hover::after {
+            width: 100%;
         }
 
         .hamburger {
@@ -213,6 +277,7 @@
             cursor: pointer;
             font-size: 1.5rem;
             color: var(--text-dark);
+            padding: 10px;
         }
 
         /* --- Floating Action Buttons --- */
@@ -227,7 +292,7 @@
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
             transition: var(--transition);
             z-index: 999;
             font-size: 1.2rem;
@@ -236,16 +301,14 @@
 
         .floating-btn:hover {
             background-color: var(--accent);
-            transform: translateY(-3px);
+            transform: translateY(-3px) scale(1.05);
         }
 
-        /* Bottom Left: Dark Mode Toggle */
         #darkModeToggle {
             bottom: 30px;
             left: 30px;
         }
 
-        /* Bottom Right: Back to Top */
         #backToTop {
             bottom: 30px;
             right: 30px;
@@ -267,7 +330,6 @@
             min-height: 600px;
             display: flex;
             align-items: center;
-            /* Realistic Unsplash Image */
             background-image: linear-gradient(var(--overlay-color), var(--overlay-color)), url('https://images.unsplash.com/photo-1544027993-37dbfe43562a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
@@ -281,38 +343,25 @@
         }
 
         .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
+            font-size: 4rem;
+            margin-bottom: 24px;
             color: #FFFFFF;
-            line-height: 1.2;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
 
         .hero p {
-            font-size: 1.25rem;
+            font-size: 1.35rem;
             margin-bottom: 40px;
             opacity: 0.95;
             color: #f0f0f0;
+            font-weight: 400;
         }
 
         /* --- Features / Services Section --- */
         .features {
             background-color: var(--bg-light);
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            color: var(--primary);
-        }
-
-        .section-subtitle {
-            margin-bottom: 60px;
-            color: var(--text-light);
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            font-size: 1.1rem;
         }
 
         .grid-3 {
@@ -323,16 +372,17 @@
 
         .feature-card {
             background: var(--card-bg);
-            padding: 50px 35px;
+            padding: 60px 40px;
             border-radius: 16px;
             text-align: center;
             transition: var(--transition);
-            border: 1px solid rgba(121, 85, 72, 0.1);
-            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            height: 100%;
         }
 
         .feature-card:hover {
-            box-shadow: var(--shadow-hover);
+            box-shadow: var(--shadow-md);
             border-color: var(--accent);
             transform: translateY(-8px);
         }
@@ -341,6 +391,12 @@
             font-size: 3rem;
             color: var(--accent);
             margin-bottom: 25px;
+            background: rgba(255, 112, 67, 0.1); /* Subtle circle bg */
+            width: 80px;
+            height: 80px;
+            line-height: 80px;
+            border-radius: 50%;
+            display: inline-block;
         }
 
         .feature-card h3 {
@@ -361,16 +417,25 @@
         .about-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 60px;
+            gap: 80px;
             align-items: center;
+        }
+
+        .about-image {
+            position: relative;
         }
 
         .about-image img {
             border-radius: 16px;
-            box-shadow: var(--shadow);
+            box-shadow: var(--shadow-md);
             width: 100%;
-            height: 400px;
+            height: 500px;
             object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.02);
         }
 
         .about-text h2 {
@@ -392,6 +457,7 @@
             gap: 15px;
             font-weight: 600;
             color: var(--text-dark);
+            font-size: 1.05rem;
         }
 
         .check-list i {
@@ -399,57 +465,87 @@
             font-size: 1.2rem;
         }
 
-        /* --- Testimonials --- */
+        /* --- Testimonials (Slider) --- */
         .testimonials {
             background-color: var(--bg-light);
         }
 
-        .testimonial-card {
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 16px;
+        .testimonial-slider {
+            display: grid;
+            grid-template-columns: 1fr;
+            max-width: 900px;
+            margin: 0 auto;
             position: relative;
-            box-shadow: var(--shadow);
-            border: 1px solid rgba(121, 85, 72, 0.1);
+            min-height: 400px; /* Prevent layout shift */
+        }
+
+        .testimonial-slide {
+            grid-column: 1;
+            grid-row: 1;
+            background: var(--card-bg);
+            padding: 60px;
+            border-radius: 20px;
+            position: relative;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out, transform 0.8s ease-out;
+            transform: translateY(20px);
+        }
+
+        .testimonial-slide.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            z-index: 10;
         }
 
         .quote-icon {
-            font-size: 2.5rem;
+            font-size: 3rem;
             color: var(--accent);
-            opacity: 0.2;
+            opacity: 0.15;
             position: absolute;
-            top: 30px;
-            left: 30px;
+            top: 40px;
+            left: 40px;
         }
 
         .testimonial-text {
             font-style: italic;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             position: relative;
             z-index: 1;
-            padding-top: 20px;
-            font-size: 1.1rem;
+            padding-top: 10px;
+            font-size: 1.4rem;
+            line-height: 1.6;
             color: var(--text-dark);
+            text-align: center;
+            font-weight: 300;
         }
 
         .author {
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 20px;
         }
 
         .author img {
-            width: 65px;
-            height: 65px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
             object-fit: cover;
-            box-shadow: var(--shadow);
+            box-shadow: var(--shadow-sm);
             border: 3px solid var(--card-bg);
+        }
+
+        .author-info {
+            text-align: left;
         }
 
         .author-info h4 {
             font-size: 1.1rem;
-            margin-bottom: 4px;
+            margin-bottom: 2px;
             color: var(--primary);
         }
 
@@ -457,6 +553,8 @@
             font-size: 0.9rem;
             color: var(--text-light);
             font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         /* --- CTA Section --- */
@@ -486,28 +584,85 @@
             color: #f0f0f0;
         }
 
+        /* --- Sign Up Form Section --- */
+        .signup-section {
+            background-color: var(--bg-light);
+            padding: 120px 0;
+            scroll-margin-top: 80px; 
+        }
+
+        .form-wrapper {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 60px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+        }
+
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 1rem;
+            background-color: var(--input-bg);
+            color: var(--text-dark);
+            transition: var(--transition);
+        }
+
+        /* Focus state for professional feel */
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(121, 85, 72, 0.1); /* Subtle glow ring */
+        }
+
+        .form-textarea {
+            resize: none; /* User requested: Not draggable */
+            min-height: 150px;
+        }
+
         /* --- Footer --- */
         footer {
-            background-color: #1a1a1a; /* Always dark for footer */
+            background-color: #1a1a1a;
             color: #d7ccc8;
-            padding: 80px 0 30px;
+            padding: 90px 0 30px;
+            border-top: 4px solid var(--primary);
         }
 
         .footer-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 50px;
-            margin-bottom: 50px;
+            gap: 60px;
+            margin-bottom: 60px;
         }
 
         .footer-col h4 {
             color: #FFFFFF;
             margin-bottom: 25px;
-            font-size: 1.3rem;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .footer-col p {
             line-height: 1.8;
+            opacity: 0.8;
         }
 
         .footer-col ul li {
@@ -516,11 +671,14 @@
 
         .footer-col ul li a {
             transition: var(--transition);
+            display: inline-block;
+            opacity: 0.8;
         }
 
         .footer-col ul li a:hover {
             color: var(--accent);
             padding-left: 5px;
+            opacity: 1;
         }
 
         .social-links {
@@ -531,7 +689,7 @@
         .social-links a {
             width: 45px;
             height: 45px;
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.05);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -539,10 +697,12 @@
             transition: var(--transition);
             font-size: 1.2rem;
             color: #FFFFFF;
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
         .social-links a:hover {
             background: var(--accent);
+            border-color: var(--accent);
             transform: translateY(-3px);
         }
 
@@ -550,7 +710,8 @@
             text-align: center;
             padding-top: 30px;
             border-top: 1px solid rgba(255,255,255,0.1);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            opacity: 0.7;
         }
 
         .copyright a {
@@ -562,30 +723,34 @@
         .copyright a:hover {
             color: var(--accent);
             text-shadow: 0 0 10px rgba(255, 112, 67, 0.5);
+            opacity: 1;
         }
 
         /* --- Responsive Queries --- */
         @media (max-width: 992px) {
             .hero h1 {
-                font-size: 3rem;
+                font-size: 3.2rem;
             }
             .about-content {
                 gap: 40px;
+            }
+            .about-image img {
+                height: 400px;
             }
         }
 
         @media (max-width: 768px) {
             .nav-links {
                 position: fixed;
-                top: 70px;
+                top: 80px;
                 right: -100%;
                 width: 100%;
-                height: calc(100vh - 70px);
+                height: calc(100vh - 80px);
                 background-color: var(--card-bg);
                 flex-direction: column;
                 justify-content: center;
                 transition: var(--transition);
-                box-shadow: -2px 5px 5px rgba(0,0,0,0.1);
+                box-shadow: -4px 0 15px rgba(0,0,0,0.1);
             }
 
             .nav-links.active {
@@ -598,7 +763,7 @@
 
             .hero {
                 height: auto;
-                padding: 150px 0 100px;
+                padding: 160px 0 120px;
                 background-attachment: scroll; 
             }
 
@@ -617,16 +782,27 @@
             .about-image img {
                 height: 300px;
             }
+            
+            .form-wrapper {
+                padding: 40px 24px;
+            }
+            
+            .testimonial-slider {
+                min-height: 500px;
+            }
+            
+            .testimonial-slide {
+                padding: 40px 25px;
+            }
 
             .section-padding {
-                padding: 70px 0;
+                padding: 80px 0;
             }
             
             .section-title {
                 font-size: 2rem;
             }
             
-            /* Adjust floating buttons for mobile to not cover content */
             #darkModeToggle {
                 bottom: 20px;
                 left: 20px;
@@ -649,14 +825,9 @@
     <header>
         <div class="container nav-container">
             <a href="#" class="logo">
-                <!-- Primary Logo Icon (Image) -->
-                <!-- onerror script: If image fails, hide image and show backup icon -->
                 <img src="portfolio-13.jpg" alt="Logo" class="logo-img" onerror="this.style.display='none'; document.getElementById('backup-icon').style.display='inline-block';">
-                
-                <!-- Backup Logo Icon (Font Awesome) - Hidden by default -->
                 <i id="backup-icon" class="fa-solid fa-hands-holding-circle" style="display: none; color: var(--accent);"></i>
-                
-                <span style="margin-left: 10px;">Strength Together</span>
+                <span>Strength Together</span>
             </a>
             <nav>
                 <ul class="nav-links" id="navLinks">
@@ -664,7 +835,7 @@
                     <li><a href="#services">Our Approach</a></li>
                     <li><a href="#about">About Us</a></li>
                     <li><a href="#contact">Contact</a></li>
-                    <li><a href="#join" class="btn btn-primary" style="margin-left: 10px;">Join Now</a></li>
+                    <li><a href="#signup" class="btn btn-primary">Join Now</a></li>
                 </ul>
             </nav>
             <div class="hamburger" id="hamburger">
@@ -676,39 +847,44 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="container hero-content">
-            <h1>You Don't Have To Face It Alone</h1>
+            <h1>You Don't Have To<br>Face It Alone</h1>
             <p>Join a compassionate community dedicated to healing, growth, and shared strength. We provide a safe space where your voice is heard and your journey is respected.</p>
-            <a href="#join" class="btn btn-accent">Find A Group</a>
-            <a href="#about" class="btn" style="color: white; border: 2px solid white; margin-left: 10px;">Learn More</a>
+            <div style="margin-top: 40px;">
+                <a href="#signup" class="btn btn-accent" style="margin-right: 15px;">Find A Group</a>
+                <a href="#about" class="btn" style="color: white; border: 2px solid rgba(255,255,255,0.8);">Learn More</a>
+            </div>
         </div>
     </section>
 
     <!-- Services / Features Section -->
     <section id="services" class="section-padding features">
         <div class="container">
-            <div class="text-center">
+            <div class="text-center section-header">
                 <h2 class="section-title">How We Help</h2>
                 <p class="section-subtitle">We offer various ways to connect and heal, ensuring you find the right support for your unique path.</p>
             </div>
 
             <div class="grid-3">
-                <!-- Card 1 -->
                 <article class="feature-card">
-                    <i class="fa-solid fa-people-group feature-icon"></i>
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-people-group"></i>
+                    </div>
                     <h3>Peer Support Circles</h3>
                     <p>Connect with others who truly understand your experiences. Our facilitated circles focus on empathy and shared wisdom.</p>
                 </article>
 
-                <!-- Card 2 -->
                 <article class="feature-card">
-                    <i class="fa-solid fa-user-shield feature-icon"></i>
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-user-shield"></i>
+                    </div>
                     <h3>Private & Confidential</h3>
                     <p>Your privacy is our priority. We maintain strict confidentiality guidelines to ensure a safe environment for sharing.</p>
                 </article>
 
-                <!-- Card 3 -->
                 <article class="feature-card">
-                    <i class="fa-solid fa-hand-holding-heart feature-icon"></i>
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-hand-holding-heart"></i>
+                    </div>
                     <h3>Resource Guidance</h3>
                     <p>Access curated mental health resources, coping strategies, and professional referrals to aid your recovery journey.</p>
                 </article>
@@ -720,7 +896,9 @@
     <section id="about" class="section-padding about">
         <div class="container about-content">
             <div class="about-text">
-                <h2>Building Strength Through Connection</h2>
+                <div class="section-header" style="margin-bottom: 30px;">
+                    <h2 class="section-title" style="margin-bottom: 15px;">Building Strength Through Connection</h2>
+                </div>
                 <p>Founded in 2023, Strength Together began with a simple belief: healing happens in community. What started as a small living room gathering has grown into a network of support for individuals facing life's toughest challenges.</p>
                 <p>We believe that vulnerability is strength. By sharing our stories, we break down the walls of isolation.</p>
                 <ul class="check-list">
@@ -730,24 +908,25 @@
                 </ul>
             </div>
             <div class="about-image">
-                <!-- Updated with realistic Unsplash image -->
                 <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Group of friends smiling together outdoors">
             </div>
         </div>
     </section>
 
-    <!-- Testimonials Section -->
+    <!-- Testimonials Section (Slider) -->
     <section class="section-padding testimonials">
         <div class="container">
-            <div class="text-center">
+            <div class="text-center section-header">
                 <h2 class="section-title">Stories of Hope</h2>
-                <p class="section-subtitle">Read experiences from members of our community.</p>
+                <p class="section-subtitle">Real experiences from members of our community.</p>
             </div>
             
-            <div class="grid-3">
-                <div class="testimonial-card">
+            <!-- Slider Container -->
+            <div class="testimonial-slider">
+                <!-- Slide 1 -->
+                <div class="testimonial-slide active">
                     <i class="fa-solid fa-quote-left quote-icon"></i>
-                    <p class="testimonial-text">"I was hesitant at first, but walking into that first meeting changed my life. I finally found a place where I didn't have to explain myself."</p>
+                    <p class="testimonial-text">"I was hesitant at first, but walking into that first meeting changed my life. I finally found a place where I didn't have to explain myself. The weight I was carrying felt lighter instantly."</p>
                     <div class="author">
                         <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Sarah J">
                         <div class="author-info">
@@ -757,9 +936,10 @@
                     </div>
                 </div>
 
-                <div class="testimonial-card">
+                <!-- Slide 2 -->
+                <div class="testimonial-slide">
                     <i class="fa-solid fa-quote-left quote-icon"></i>
-                    <p class="testimonial-text">"The facilitators are incredibly kind and skilled. They create a balance where everyone feels heard without feeling pressured."</p>
+                    <p class="testimonial-text">"The facilitators are incredibly kind and skilled. They create a delicate balance where everyone feels heard without feeling pressured. It's the highlight of my week."</p>
                     <div class="author">
                         <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Mark D">
                         <div class="author-info">
@@ -769,9 +949,10 @@
                     </div>
                 </div>
 
-                <div class="testimonial-card">
+                <!-- Slide 3 -->
+                <div class="testimonial-slide">
                     <i class="fa-solid fa-quote-left quote-icon"></i>
-                    <p class="testimonial-text">"Strength Together gave me the tools I needed to cope with my anxiety. The peer support is unmatched."</p>
+                    <p class="testimonial-text">"Strength Together gave me the tools I needed to cope with my anxiety. The peer support is unmatched, and I've made friendships that I know will last a lifetime."</p>
                     <div class="author">
                         <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" alt="Elena R">
                         <div class="author-info">
@@ -785,11 +966,53 @@
     </section>
 
     <!-- Call to Action -->
-    <section id="join" class="cta-section">
+    <section class="cta-section">
         <div class="container">
             <h2>Ready to find your circle?</h2>
             <p>Take the first step towards connection and healing today.</p>
-            <button class="btn btn-accent" style="border: 2px solid white;">Sign Up Free</button>
+            <a href="#signup" class="btn btn-accent" style="border: 2px solid white;">Sign Up Free</a>
+        </div>
+    </section>
+
+    <!-- NEW Sign Up Section -->
+    <section id="signup" class="signup-section">
+        <div class="container">
+            <div class="text-center section-header">
+                <h2 class="section-title">Join the Community</h2>
+                <p class="section-subtitle">Fill out the form below to get started. It's free, confidential, and the first step to finding your support group.</p>
+            </div>
+            
+            <div class="form-wrapper">
+                <form id="signupForm">
+                    <div class="form-group">
+                        <label for="name" class="form-label">Full Name</label>
+                        <input type="text" id="name" class="form-input" placeholder="Your Name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email Address</label>
+                        <input type="email" id="email" class="form-input" placeholder="you@example.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="interest" class="form-label">I'm interested in...</label>
+                        <select id="interest" class="form-select">
+                            <option value="general">General Support Circle</option>
+                            <option value="anxiety">Anxiety & Stress</option>
+                            <option value="grief">Grief & Loss</option>
+                            <option value="caregivers">Caregiver Support</option>
+                            <option value="other">Other / Not Sure</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message" class="form-label">Message (Optional)</label>
+                        <textarea id="message" class="form-textarea" placeholder="Tell us a little about what you're looking for..."></textarea>
+                    </div>
+
+                    <button type="submit" id="submitBtn" class="btn btn-primary btn-full">Join Now</button>
+                </form>
+            </div>
         </div>
     </section>
 
@@ -875,12 +1098,67 @@
                 });
             });
 
+            /* --- Testimonial Carousel Logic --- */
+            const slides = document.querySelectorAll('.testimonial-slide');
+            let currentSlide = 0;
+            const slideInterval = 6000; // 6 seconds
+
+            function nextSlide() {
+                // Remove active class from current slide
+                slides[currentSlide].classList.remove('active');
+                
+                // Calculate next slide index
+                currentSlide = (currentSlide + 1) % slides.length;
+                
+                // Add active class to next slide
+                slides[currentSlide].classList.add('active');
+            }
+
+            // Start auto-play
+            let slideTimer = setInterval(nextSlide, slideInterval);
+
+            // Pause on hover
+            const sliderContainer = document.querySelector('.testimonial-slider');
+            sliderContainer.addEventListener('mouseenter', () => {
+                clearInterval(slideTimer);
+            });
+            sliderContainer.addEventListener('mouseleave', () => {
+                slideTimer = setInterval(nextSlide, slideInterval);
+            });
+
+            /* --- Form Handling with Simulation --- */
+            const form = document.getElementById('signupForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const originalBtnText = submitBtn.innerText;
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                // Simulate loading state
+                submitBtn.disabled = true;
+                submitBtn.innerText = "Sending...";
+                submitBtn.style.opacity = "0.7";
+
+                // Simulate server delay
+                setTimeout(() => {
+                    submitBtn.innerText = "Welcome!";
+                    submitBtn.style.backgroundColor = "var(--primary)";
+                    
+                    setTimeout(() => {
+                        alert('Thank you for reaching out! We have received your request and will contact you shortly to welcome you to the community.');
+                        form.reset();
+                        submitBtn.disabled = false;
+                        submitBtn.innerText = originalBtnText;
+                        submitBtn.style.opacity = "1";
+                    }, 500);
+                }, 1500);
+            });
+
             /* --- Dark Mode Logic --- */
             const darkModeToggle = document.getElementById('darkModeToggle');
             const body = document.body;
             const darkIcon = darkModeToggle.querySelector('i');
 
-            // Check local storage
             if (localStorage.getItem('theme') === 'dark') {
                 body.classList.add('dark-mode');
                 darkIcon.classList.remove('fa-moon');
